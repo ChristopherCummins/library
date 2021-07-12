@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href ="reset.css">
+    <title>Library</title>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+    <div class = "library">
+        <div class ="heading">Library</div>
+        <button class = "addBook" onclick="showForm()">Add Book</button>
+        <form id="addBookForm" style="display: none;"> 
+            <label for="title">Title</label><br>
+            <input type="text" id ="title" name="title"><br>
+            <label for="author">Author</label><br>
+            <input type = "text" id="author" name = "author"><br>
+            <label for="numPages">Number of Pages</label><br>
+            <input type = "text" id="numPages" name = "numPages"><br>
+            <input type = "checkbox" id = "read" name = "read" value = "read">
+            <label for="read">Read</label><br>
+            <input type = "button" value = "Add this book" onclick ="addBookToLibrary(form)">
+        </form>
+        <div class = "displayBooks"></div>
+            <table class = "bookList">
+            </table>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src=script.js></script>
+</body>
+</html>
