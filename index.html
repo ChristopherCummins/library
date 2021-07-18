@@ -8,24 +8,23 @@
 </head>
 <body>
     <div class = "library">
-        <div class ="heading">Library</div>
+        <div class ="appTitle">Library</div>
         <button class = "addBook" onclick="showForm()">Add Book</button>
         <form id="addBookForm" style="display: none;"> 
             <label for="title">Title</label><br>
-            <input type="text" id ="title" name="title"><br>
+            <input type="text" id ="title" name="title" required><br>
             <label for="author">Author</label><br>
-            <input type = "text" id="author" name = "author"><br>
+            <input type = "text" id="author" name = "author" required><br>
             <label for="numPages">Number of Pages</label><br>
-            <input type = "text" id="numPages" name = "numPages"><br>
-            <input type = "checkbox" id = "read" name = "read" value = "read">
+            <input type = "text" id="numPages" name = "numPages" required><br>
+            <input type = "checkbox" id = "read" name = "read" value = "read" required>
             <label for="read">Read</label><br>
-            <input type = "button" value = "Add this book" onclick ="addBookToLibrary(form)">
+            <input type = "button" value = "Add this book" onclick ="newElement()">
         </form>
-        <div class = "displayBooks"></div>
-            <table class = "bookList">
-            </table>
+        <div id = "cardContainer">
+
+        </div>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src=script.js></script>
 </body>
 </html>

@@ -1,4 +1,29 @@
-.heading {
+.appTitle {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 52px;
+    text-align: center;
 }
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px; /* 5px rounded corners */
+    width: 200px;
+    text-align: center;
+  }
+  
+  /* Add rounded corners to the top left and the top right corner of the image */
+  img {
+    border-radius: 5px 5px 0 0;
+  }
+
+  #addBookForm {
+    margin: auto;
+    padding: 10px;
+  }
+
+  .addBook {
+    margin: auto;
+    justify-content: center;
+    justify-self: center;;
+  }
