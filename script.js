@@ -17,18 +17,12 @@ myLibrary.push(Hobbit);
 
 console.log(myLibrary);
 
-function showForm() {
-    document.getElementById("addBookForm").style.display="block";
-}
 
 form = document.querySelector("form");
 function addBookToLibrary(form) {
     let newBook = new Book (form.title.value, form.author.value, form.numPages.value, form.read.value);
     myLibrary.push(newBook);
     console.log(myLibrary);
-
-    document.getElementById("addBookForm").reset();
-
 }
 
 function newElement() {
@@ -44,12 +38,15 @@ function newElement() {
     let t = document.createTextNode(title);
     heading.appendChild(t);
     let subheader = document.createElement("h4");
-    let a = document.createTextNode(author);
+    subheader.classList.add("subheader");
+    let a = document.createTextNode("by " + author);
     subheader.appendChild(a);
     let p1 = document.createElement("p");
-    let n = document.createTextNode(numPages);
+    p1.classList.add("numPages")
+    let n = document.createTextNode(numPages + " pages");
     p1.appendChild(n);
     let p2 = document.createElement("p");
+    p2.classList.add("readStatus");
     let r = document.createTextNode(read);
     p2.appendChild(r);
 
@@ -61,14 +58,15 @@ function newElement() {
     document.getElementById("cardContainer").appendChild(card);
 
     addBookToLibrary(form);
+    document.getElementById("addBookForm").reset();
 
-    let span = document.createElement("SPAN");
+    let removeButton = document.createElement("button");
     let remove = document.createTextNode("Remove");
-    span.className = "remove";
-    span.appendChild(remove);
-    card.appendChild(span);
+    removeButton.className = "btn btn-danger";
+    removeButton.appendChild(remove);
+    card.appendChild(removeButton);
 
-    let removeList = document.getElementsByClassName("remove");
+    let removeList = document.getElementsByClassName("btn btn-danger");
     for (i = 0; i < removeList.length; i++) {
         removeList[i].onclick = function() {
             let div = this.parentElement;
@@ -80,17 +78,18 @@ function newElement() {
 
 let numBooks = document.getElementsByClassName("card")
 for (i = 0; i < numBooks.length; i++) {
-    let span = document.createElement("SPAN");
+    let removeButton = document.createElement("button");
     let remove = document.createTextNode("Remove");
-    span.className = "remove";
-    span.appendChild(remove);
-    numBooks[i].appendChild(span);
+    removeButton.className = "btn btn-danger";
+    removeButton.appendChild(remove);
+    numBooks[i].appendChild(removeButton);
 }
 
-let remove = document.getElementsByClassName("remove");
+let remove = document.getElementsByClassName("btn btn-danger");
 for (i = 0; i < remove.length; i++) {
     remove[i].onclick = function() {
         let div = this.parentElement;
         div.remove();
     }
 }
+

@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href ="reset.css">
     <title>Library</title>
@@ -8,19 +11,54 @@
 </head>
 <body>
     <div class = "library">
-        <div class ="appTitle">Library</div>
-        <button class = "addBook" onclick="showForm()">Add Book</button>
-        <form id="addBookForm" style="display: none;"> 
-            <label for="title">Title</label><br>
-            <input type="text" id ="title" name="title" required><br>
-            <label for="author">Author</label><br>
-            <input type = "text" id="author" name = "author" required><br>
-            <label for="numPages">Number of Pages</label><br>
-            <input type = "text" id="numPages" name = "numPages" required><br>
-            <input type = "checkbox" id = "read" name = "read" value = "read" required>
-            <label for="read">Read</label><br>
-            <input type = "button" value = "Add this book" onclick ="newElement()">
-        </form>
+        <img src="logo1.png" alt="Book Logo">
+        <div class ="appTitle">Library</div> 
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addBookModal">
+            Add Book
+          </button>
+          <hr class="solid">
+          <div class="modal fade" id="addBookModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="ModalLabel">Add a New Book</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <form id="addBookForm"> 
+                        <div class="form-group">
+                            <label for="title">Title</label><br>
+                            <input type="text" class="form-control" id ="title" aria-describedby="titleHelp" placeholder="Ex: The Giver" required>
+                            <small id="titleHelp" class="form-text text-muted">Enter the title of the book.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="author">Author</label><br>
+                            <input type = "text" class="form-control" id="author" aria-describedby="authorHelp" placeholder="Ex: Louis Lowry" name = "author" required>
+                            <small id="authorHelp" class="form-text text-muted">Enter the name of the book's author.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="numPages">Number of Pages</label><br>
+                            <input type = "text" class="form-control" id="numPages" aria-describedby="numPagesHelp"  placeholder="Ex: 208" required>
+                            <small id="numPagesHelp" class="form-text text-muted">Enter the book's number of pages.</small>
+                        </div>
+                        <div class="form-group">
+                            <label class="formControlSelect" for="read">What is your current status with this book?</label>
+                            <select multiple class="form-control" id = "read" required>
+                                <option value= "Read">Read</option>
+                                <option value="Unread">Unread</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary"  data-dismiss="modal" onclick="newElement()">Save changes</button>
+                </div>
+            </div>
+            </div>
+            </div>
         <div id = "cardContainer">
 
         </div>
