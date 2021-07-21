@@ -32,10 +32,12 @@ img {
     border-radius: 5px; /* 5px rounded corners */
     width: 400px;
     text-align: center;
+    padding-bottom: 10px;
   }
 
   #cardContainer {
     display: grid;
+    row-gap: 10px;
   }
 
   .heading {
@@ -43,16 +45,19 @@ img {
     background-color: black;
     color: white;
     font-style: oblique;
+    padding-bottom: 5px;
   }
 
   .subheader {
     font-size: 20px;
+    padding-top: 5px;
   }
 
   .numPages {
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .readStatus {
-    font-size: 18px;
+    font-size: 16px;
+    padding-bottom: 5px;
   }
