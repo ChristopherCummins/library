@@ -5,6 +5,7 @@ function Book (title, author, numPages, read) {
     this.Author = author;
     this.Pages = numPages;
     this.Read = read;
+    this.id = title.slice(0,3).toUpperCase() + numPages;
 }
 
 let Bible = new Book("The Bible", "God", 1700, "Read");
@@ -31,7 +32,6 @@ function newElement() {
     clearCards();
     showCards();
     addRemoveButton();
-    addUpdateButton();
 }
 
 function showCards() {
@@ -76,7 +76,7 @@ function createCard() {
     
     let updateButton = document.createElement("button");
     let update = document.createTextNode("Update Status");
-    updateButton.className = "btn btn-primary";
+    updateButton.className = "updateButton";
     updateButton.appendChild(update);
     card.appendChild(updateButton);
 
@@ -108,15 +108,16 @@ function addRemoveButton() {
 addRemoveButton();
 
 function addUpdateButton() {
-    let update = document.getElementsByClassName("btn btn-primary");
+    let update = document.getElementsByClassName("updateButton");
     for (i = 0; i < update.length; i++) {
         update[i].onclick = function() {
-        myLibrary[i].Read = "Read";
+            console.log(i);
         }
     }
 }
 
 addUpdateButton();
+
 
 function checkLibrary() {
     if (myLibrary.length === 0) {
