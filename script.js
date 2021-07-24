@@ -88,12 +88,13 @@ const createCard = (item) => {
 
     removeButton.addEventListener("click", () => {
         myLibrary.splice(myLibrary.indexOf(item), 1);
-        
+        setLocal();
         updateBooks();
     })
     
     updateButton.addEventListener("click", () => {
         item.read = !item.read;
+        setLocal();
         updateBooks();
     })
 }
