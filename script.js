@@ -1,91 +1,42 @@
+const titleInput = document.querySelector("#title");
+const authorInput = document.querySelector("#author");
+const numPagesInput = document.querySelector("#numPages");
+const readInput = document.querySelector("#readStatus");
+
+
 let myLibrary = [];
 
 function Book (title, author, numPages, read) {
-    this.Title = title;
-    this.Author = author;
-    this.Pages = numPages;
-    this.Read = read;
-    this.id = title.slice(0,3).toUpperCase() + numPages;
+    this.title = title;
+    this.author = author;
+    this.pages = numPages;
+    this.read = readInput.checked;
+    this.id = title.slice(0,5).toUpperCase() + numPages;
 }
 
-let Bible = new Book("The Bible", "God", 1700, "Read");
+const addBook = () => {
+    title = titleInput.value
+    author = authorInput.value;
+    pages = numPagesInput.value;
+    read = readInput.value;
+    id = this.id;
 
-let Hobbit = new Book("The Hobbit", "JRR Tolkein", 3443, "Unread");
+    let newBook = new Book(title, author, pages, read)
 
-
-myLibrary.push(Bible);
-myLibrary.push(Hobbit);
-
-console.log(myLibrary);
-
-
-form = document.querySelector("form");
-function addBookToLibrary(form) {
-    let newBook = new Book (form.title.value, form.author.value, form.numPages.value, form.read.value);
     myLibrary.push(newBook);
-    console.log(myLibrary);
-}
-
-function newElement() {
-    addBookToLibrary(form);
+    updateBooks();
+    setLocal();
+    checkLibrary();
     document.getElementById("addBookForm").reset();
+
+}
+
+const updateBooks = () => {
     clearCards();
-    showCards();
-    addRemoveButton();
-}
-
-function showCards() {
     for (i = 0; i < myLibrary.length; i++) {
-        createCard();
+        createCard(myLibrary[i])
     }
-}
-
-showCards();
-
-function createCard() {
-    let card = document.createElement("div");
-    card.classList.add("card");
-    let title = myLibrary[i]["Title"];
-    let author = myLibrary[i]["Author"];
-    let numPages = myLibrary[i]["Pages"];
-    let read = myLibrary[i]["Read"];
-
-    let heading = document.createElement("h3");
-    heading.classList.add("heading");
-    let t = document.createTextNode(title);
-    heading.appendChild(t);
-    let subheader = document.createElement("h4");
-    subheader.classList.add("subheader");
-    let a = document.createTextNode("Author: " + author);
-    subheader.appendChild(a);
-    let p1 = document.createElement("p");
-    p1.classList.add("numPages")
-    let n = document.createTextNode("Page count: " + numPages);
-    p1.appendChild(n);
-    let p2 = document.createElement("p");
-    p2.classList.add("readStatus");
-    let r = document.createTextNode("Status: " + read);
-    p2.appendChild(r);
-
-    card.appendChild(heading);
-    card.appendChild(subheader);
-    card.appendChild(p1);
-    card.appendChild(p2);
-
-    document.getElementById("cardContainer").appendChild(card); 
-    
-    let updateButton = document.createElement("button");
-    let update = document.createTextNode("Update Status");
-    updateButton.className = "updateButton";
-    updateButton.appendChild(update);
-    card.appendChild(updateButton);
-
-    let removeButton = document.createElement("button");
-    let remove = document.createTextNode("Remove");
-    removeButton.className = "btn btn-danger";
-    removeButton.appendChild(remove);
-    card.appendChild(removeButton);
-
+    checkLibrary();
 }
 
 function clearCards() {
@@ -93,31 +44,59 @@ function clearCards() {
     cardContainer.textContent="";
 }
 
-function addRemoveButton() {
-    let remove = document.getElementsByClassName("btn btn-danger");
-    for (i = 0; i < remove.length; i++) {
-        remove[i].onclick = function() {
-            let div = this.parentElement;
-            div.remove();
-            myLibrary.splice(remove[i], 1);
-            checkLibrary();
-        }
+const createCard = (item) => {
+    const card = document.createElement("div");
+    const cardTitle = document.createElement("h3");
+    const cardAuthor = document.createElement("h4");
+    const cardPages = document.createElement("p");
+    const removeButton = document.createElement("button");
+    const updateButton = document.createElement("button");
+
+    card.classList.add("card");
+    card.setAttribute("id", item.id);
+    cardContainer.appendChild(card);
+
+    let cardTitleText = document.createTextNode(item.title);
+    cardTitle.appendChild(cardTitleText);
+    cardTitle.classList.add("cardTitle");
+    let cardAuthorText = document.createTextNode("Author: " + item.author);
+    cardAuthor.appendChild(cardAuthorText);
+    cardAuthor.classList.add("cardAuthor");
+    let cardPagesText = document.createTextNode("Page count: " + item.pages);
+    cardPages.appendChild(cardPagesText);
+    cardPages.classList.add("cardPages")
+    let cardReadText = document.createTextNode("Status: " + item.read);
+
+    card.appendChild(cardTitle);
+    card.appendChild(cardAuthor);
+    card.appendChild(cardPages);
+    card.appendChild(updateButton);
+    card.appendChild(removeButton);
+
+    removeButton.className = "btn btn-danger";
+    let removeButtonText = document.createTextNode("Remove");
+    removeButton.appendChild(removeButtonText);
+    removeButton.setAttribute("id", "removeButton");
+
+    updateButton.className = "btn btn-primary";
+    updateButton.setAttribute("id", "updateButton")
+    if (item.read === false) {
+        updateButton.textContent = "Not Read";
+    } else {
+        updateButton.textContent = "Read"
     }
+
+    removeButton.addEventListener("click", () => {
+        myLibrary.splice(myLibrary.indexOf(item), 1);
+        
+        updateBooks();
+    })
+    
+    updateButton.addEventListener("click", () => {
+        item.read = !item.read;
+        updateBooks();
+    })
 }
-
-addRemoveButton();
-
-function addUpdateButton() {
-    let update = document.getElementsByClassName("updateButton");
-    for (i = 0; i < update.length; i++) {
-        update[i].onclick = function() {
-            console.log(i);
-        }
-    }
-}
-
-addUpdateButton();
-
 
 function checkLibrary() {
     if (myLibrary.length === 0) {
@@ -127,3 +106,19 @@ function checkLibrary() {
 }
 
 checkLibrary();
+
+function setLocal() {
+    localStorage.setItem(`myLibrary`, JSON.stringify(myLibrary));
+  };
+
+function restoreLocal() {
+    myLibrary = JSON.parse(localStorage.getItem('myLibrary'));
+    if (myLibrary === null) {
+        myLibrary = [];
+    } else {
+        checkLibrary();
+        updateBooks();
+    };
+  };
+  
+restoreLocal();  

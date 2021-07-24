@@ -43,18 +43,16 @@
                             <input type = "text" class="form-control" id="numPages" aria-describedby="numPagesHelp"  placeholder="Ex: 208" required>
                             <small id="numPagesHelp" class="form-text text-muted">Enter the book's number of pages.</small>
                         </div>
-                        <div class="form-group">
-                            <label class="formControlSelect" for="read">What is your current status with this book?</label>
-                            <select multiple class="form-control" id = "read" required>
-                                <option value= "Read">Read</option>
-                                <option value="Unread">Unread</option>
+                        <div class="custom-control custom-checkbox">
+                            <label class="custom-control-label" for="read">Check this box if you've finished this book</label>
+                            <input type="checkbox" class="custom-control-input" id="readStatus">
                             </select>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary"  data-dismiss="modal" onclick="newElement()">Save changes</button>
+                    <button type="button" class="btn btn-primary"  data-dismiss="modal" onclick="addBook()">Save changes</button>
                 </div>
             </div>
             </div>
