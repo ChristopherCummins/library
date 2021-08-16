@@ -102,7 +102,11 @@ const createCard = (item) => {
 function checkLibrary() {
     if (myLibrary.length === 0) {
         let cardContainer = document.getElementById("cardContainer");
-        cardContainer.innerHTML ="Your library is empty. Add a book!";
+        let emptyText = document.createElement("div");
+        let emptyLibraryText = document.createTextNode("Your library is empty. Add a book!")
+        emptyText.appendChild(emptyLibraryText)
+        cardContainer.appendChild(emptyText);
+        emptyText.classList.add("emptyLibraryText");
     }
 }
 
